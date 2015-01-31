@@ -1,0 +1,9 @@
+{
+    "port": 3000,
+    "paths" : {
+        "css" : {
+            "in" : "/assets/css/**/*.scss",
+            "out" : "/css"
+        }
+    }
+}

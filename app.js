@@ -7,33 +7,47 @@ var fs = require('fs');
 var path = require('path');
 
 var colors = require('colors');
-
-var express = require('express');
-var app = express();
-app.set('view engine', 'ejs');
-//app.set('views', __dirname + '/customFolder');
-
-var port = 3000;
 var info = console.info;
 
+var config = require('./config.json');
+var paths = config.paths;
 
-app.get('/', function(req, res) {
-    res.send('<h1>Home</h1>');
-});
+//
+// express config
+var express = require('express');
+var routes = require('./routes');
+var app = express();
+app.set('view engine', 'ejs');
+//using non-default folder
+//app.set('views', __dirname + '/customFolder');
 
-app.get('/section', function(req, res) {
-    res.render('section', {port : port});
-});
+//
+// locals
+app.locals = {
+    version : "0.1",
+    port : config.port,
+    cssPath : paths.css.out,
 
-app.get('/pages/:page?', function(req, res) {
-    var page = req.params.page;
-    res.send('<h1>Page: ' + page + '</h1>');
+    name : "app"
+};
+
+//
+// router
+app.get('/', routes.index);
+app.get('/section', routes.section);
+
+app.get('/css/:file?', function(req, res){
+    res.sendFile(__dirname + paths.css.out + '/' + req.params.file);
 });
 
 app.get('*', function (req, res){
    res.send('Bad route!');
 });
 
-var server = app.listen(port, function(){
-    info('App is running on port'.green + ' ' + colors.yellow(port));
+//
+// SERVER
+//
+
+var server = app.listen(config.port, function(){
+    info('App is running on port'.green + ' ' + colors.yellow(config.port));
 });

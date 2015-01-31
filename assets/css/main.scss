@@ -1,0 +1,39 @@
+html {
+	box-sizing: border-box;
+
+	color: #444;
+	font: 14px/1.6 normal Tahoma, sans-serif;
+	}
+
+* {
+	box-sizing: inherit;
+	&:before, &:after {
+		box-sizing: inherit;
+		}
+	}
+
+h1 {
+	border-left: 2vw solid #ccc;
+	padding-left: 2vw;
+	font-size: 2rem;
+	color: #666;
+	}
+
+section {
+	font-size: 1.2rem;
+	margin: 2vh 2vw;
+	}
+
+header {
+	
+	}
+
+footer {
+	background: #f4f4f4;
+	padding: 2vh 2vw;
+
+	hr {
+
+		}
+	}
+
