@@ -10,13 +10,14 @@ var colors = require('colors');
 var info = console.info;
 
 var config = require('./config.json');
-var paths = config.paths;
 
 //
 // express config
 var express = require('express');
-var routes = require('./routes');
+var routes = require('./routes/index');
+
 var app = express();
+
 app.set('view engine', 'ejs');
 //using non-default folder
 //app.set('views', __dirname + '/customFolder');
@@ -25,23 +26,33 @@ app.set('view engine', 'ejs');
 // locals
 app.locals = {
     version : "0.1",
+    title : "Express Dummy",
+
     port : config.port,
-    cssPath : paths.css.out,
 
     name : "app"
 };
 
+/*
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+*/
+
+//
+// serve static
+app.use(express.static(path.join(__dirname, 'public')));
+
 //
 // router
-app.get('/', routes.index);
-app.get('/section', routes.section);
+app.use('/', routes);
+app.use('/section', routes);
 
-app.get('/css/:file?', function(req, res){
-    res.sendFile(__dirname + paths.css.out + '/' + req.params.file);
-});
-
-app.get('*', function (req, res){
-   res.send('Bad route!');
+// catch 404 and forward to error handler
+app.use(function(req, res) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    res.send('404: NOT FOUND');
 });
 
 //

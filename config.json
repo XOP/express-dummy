@@ -3,7 +3,7 @@
     "paths" : {
         "css" : {
             "in" : "/assets/css/**/*.scss",
-            "out" : "/css"
+            "out" : "/public/css"
         }
     }
 }

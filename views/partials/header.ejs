@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Section</title>
-        <link rel="stylesheet" href="<%= cssPath %>/main.css"/>
-    </head>
-    <body class="__<%= name %>">
+<h1>
+    <main>Section</main>
+    <sub>App is running on port: <%= port %></sub>
+</h1>
 
-    <h1>
-        <main>Section</main>
-        <sub>App is running on port: <%= port %></sub>
-    </h1>
+
+<nav>
+    <section>
+        <% if(name=='app'){ %>
+            <span>Main</span>
+        <% } else { %>
+            <a href="/">Main</a>
+        <% } %>
+
+        <% if(name=='section'){ %>
+            <span>Sections</span>
+        <% } else { %>
+            <a href="/section">Sections</a>
+        <% } %>
+    </section>
+</nav>

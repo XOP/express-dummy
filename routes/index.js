@@ -1,11 +1,20 @@
-exports.index = function(req,res){
-    res.render('default', {
+var express = require('express');
+var router = express.Router();
+
+//
+// home
+router.get('/', function(req, res, next) {
+    res.render('index', {
         name : "app"
     });
-};
+});
 
-exports.section = function(req,res){
+//
+// section
+router.get('/section', function(req, res, next) {
     res.render('section', {
         name : "section"
     });
-};
+});
+
+module.exports = router;

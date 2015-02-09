@@ -24,13 +24,39 @@ section {
 	margin: 2vh 2vw;
 	}
 
+nav {
+	background: #444;
+	color: #eee;
+	padding: 1vh 2vw;
+	margin: 0 2vw 4vh;
+
+	section {
+		margin: 0;
+		}
+
+	a, span {
+		&:not(:first-child){
+			margin-left: 1vw;
+			}
+		}
+
+	a {
+		color: #eee;
+
+		&:hover {
+			color: #fff;
+			}
+		}
+	}
+
 header {
 	
 	}
 
 footer {
-	background: #f4f4f4;
-	padding: 2vh 2vw;
+	background: #ccc;
+	padding: 1vh 2vw;
+	margin: 4vh 2vw 0;
 
 	hr {
 
