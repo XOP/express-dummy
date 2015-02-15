@@ -1,8 +1,7 @@
 <h1>
-    <main>Section</main>
+    <main><%= title %></main>
     <sub>App is running on port: <%= port %></sub>
 </h1>
-
 
 <nav>
     <section>
@@ -10,12 +9,6 @@
             <span>Main</span>
         <% } else { %>
             <a href="/">Main</a>
-        <% } %>
-
-        <% if(name=='section'){ %>
-            <span>Sections</span>
-        <% } else { %>
-            <a href="/section">Sections</a>
         <% } %>
     </section>
 </nav>

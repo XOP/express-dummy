@@ -1,7 +1,13 @@
+$c-main : #444;
+$c-alt : #666;
+$c-aux : #eee;
+$c-inv : #fff;
+$c-brand : rgb(62, 209, 232);
+
 html {
 	box-sizing: border-box;
 
-	color: #444;
+	color: $c-main;
 	font: 14px/1.6 normal Tahoma, sans-serif;
 	}
 
@@ -16,7 +22,13 @@ h1 {
 	border-left: 2vw solid #ccc;
 	padding-left: 2vw;
 	font-size: 2rem;
-	color: #666;
+	color: $c-alt;
+	}
+
+h2 {
+	padding-left: 4vw;
+	font-size: 1.4rem;
+	color: $c-alt;
 	}
 
 section {
@@ -26,7 +38,7 @@ section {
 
 nav {
 	background: #444;
-	color: #eee;
+	color: $c-aux;
 	padding: 1vh 2vw;
 	margin: 0 2vw 4vh;
 
@@ -41,10 +53,27 @@ nav {
 		}
 
 	a {
-		color: #eee;
+		color: $c-aux;
 
 		&:hover {
-			color: #fff;
+			color: $c-inv;
+			}
+		}
+	}
+
+menu {
+	margin: 0 2vw;
+	padding: 1vh 2vw;
+
+	li {
+		list-style: square outside;
+		font-size: 1.2rem;
+
+		a {
+			color: $c-alt;
+			&:hover {
+				color: $c-brand;
+				}
 			}
 		}
 	}

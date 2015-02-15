@@ -33,6 +33,8 @@ app.locals = {
     name : "app"
 };
 
+app.locals.appdata = require('./data.json');
+
 /*
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

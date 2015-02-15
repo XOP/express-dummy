@@ -8,8 +8,24 @@
     <% include partials/header.ejs %>
 
     <section>
-        App home
+        <%= appdata.intro.about  %>
+
+        <br/>
+
+        <small>
+            <%= appdata.intro.extra %>
+        </small>
     </section>
+
+
+    <menu>
+        <% appdata.data.forEach(function(item, i, array){ %>
+        <li>
+            <a href="/section/<%= i %>" title="<%= item.company %>"><%= item.company %></a>
+        </li>
+        <% }); %>
+    </menu>
+
 
     <% include partials/footer.ejs %>
 
