@@ -4,7 +4,6 @@ var del = require('del');
 var sass = require('gulp-sass');
 
 var paths = require('./config.json').paths;
-console.log(paths);
 
 var normPath = function(path){
     return '.' + path;

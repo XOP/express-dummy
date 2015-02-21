@@ -5,10 +5,26 @@ $c-inv : #fff;
 $c-brand : rgb(62, 209, 232);
 
 html {
-	box-sizing: border-box;
+	font-size: 62.5%; // skeleton
+	}
 
+body {
+	font-size: 1.6rem;
+	line-height: 1.6;
+	font-family: normal Tahoma, sans-serif;
 	color: $c-main;
-	font: 14px/1.6 normal Tahoma, sans-serif;
+
+	@media only screen and (min-width: 550px){
+		& {
+			font-size: 2rem;
+			}
+		}
+
+	@media only screen and (min-width: 750px){
+		& {
+			font-size: 2.2rem;
+			}
+		}
 	}
 
 * {
@@ -21,19 +37,32 @@ html {
 h1 {
 	border-left: 2vw solid #ccc;
 	padding-left: 2vw;
-	font-size: 2rem;
+
+	font-size: 1.8em;
 	color: $c-alt;
 	}
 
 h2 {
 	padding-left: 4vw;
-	font-size: 1.4rem;
+
+	font-size: 1.6em;
 	color: $c-alt;
 	}
 
 section {
-	font-size: 1.2rem;
 	margin: 2vh 2vw;
+
+	@media only screen and (min-width: 550px){
+		& {
+			max-width: 75vw;
+			}
+		}
+
+	@media only screen and (min-width: 750px){
+		& {
+			max-width: 60vw;
+			}
+		}
 	}
 
 nav {
@@ -67,7 +96,7 @@ menu {
 
 	li {
 		list-style: square outside;
-		font-size: 1.2rem;
+		font-size: 1.2em;
 
 		a {
 			color: $c-alt;

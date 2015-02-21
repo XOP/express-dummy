@@ -14,13 +14,16 @@ var config = require('./config.json');
 //
 // express config
 var express = require('express');
-var routes = require('./routes/index');
+var compress = require('compression');
 
 var app = express();
 
 app.set('view engine', 'ejs');
 //using non-default folder
 //app.set('views', __dirname + '/customFolder');
+
+// add the compression
+app.use(compress({level: 6}));
 
 //
 // locals
@@ -42,13 +45,14 @@ app.use(cookieParser());
 */
 
 //
-// serve static
-app.use(express.static(path.join(__dirname, 'public')));
+// serve static (cacheable)
+var oneDay = 86400000;
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneDay*30 }));
 
 //
 // router
-app.use('/', routes);
-app.use('/section', routes);
+app.use('/', require('./routes/index'));
+app.use('/section', require('./routes/sections'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res) {
