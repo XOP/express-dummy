@@ -1,14 +1,14 @@
-<h1>
-    <main><%= title %></main>
-    <sub>App is running on port: <%= port %></sub>
-</h1>
+<header>
+    <div class="container">
+        <div class="columns <%= columns.one %>">
+            <h1>
+                <a href="/">
+                    <%= title %>
+                </a>
+            </h1>
+        </div>
+        <div class="columns <%= columns.two %>">
 
-<nav>
-    <section>
-        <% if(name=='app'){ %>
-            <span>Main</span>
-        <% } else { %>
-            <a href="/">Main</a>
-        <% } %>
-    </section>
-</nav>
+        </div>
+    </div>
+</header>

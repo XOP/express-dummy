@@ -1,0 +1,217 @@
+/* Express Dummy
+---------------------------------------------------------------------------------- */
+
+/* Core
+-------------------------------------------------- */
+
+body {
+    font-size: 1.6rem;
+    font-family: Tahoma, Geneva, sans-serif;
+
+    color: $c-main;
+    background-color: $bg-main;
+
+    overflow-y: scroll;
+    }
+
+.container {
+    max-width: 1400px;
+    padding: 0 $grid;
+    width: 80%;
+    }
+
+a {
+    color: $c-brand;
+
+    &:hover {
+        color: lighten($c-brand, 30%);
+        }
+    }
+
+/* /Core */
+
+
+/* Flex containers
+-------------------------------------------------- */
+
+html {
+    height: 100%;
+    }
+
+body {
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    }
+
+main {
+    flex-grow: 1;
+    }
+
+/* /Flex containers */
+
+
+/* Common
+-------------------------------------------------- */
+
+/* Message */
+
+.message {
+    font-size: 1.6rem;
+    text-align: center;
+    }
+
+/* /Message */
+
+/* Button */
+
+button,
+.button {
+    transition: background-color .15s ease;
+
+    &:hover {
+        border-color: $bg-brand-2;
+        }
+
+    &:active {
+        border-color: $bg-brand;
+        transform: translateY(1px);
+        }
+    }
+
+/* /Button */
+
+/* Notification */
+
+.notification {
+    cover();
+    position: fixed;
+    z-index: 100;
+    background: rgba(255, 255, 255, .8);
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: opacity .15s ease, visibility 0s .15s;
+
+    &.__active {
+        visibility: visible;
+        opacity: 1;
+
+        transition-delay: 0s;
+        }
+
+    .message {
+        position: absolute;
+        left: 0; right: 0; top: 0;
+        z-index: 1000;
+
+        padding: ($line*2) $grid;
+
+        color: $c-inv;
+        background: $bg-brand;
+        box-shadow: 0 1px 5px - 1px rgba(0, 0, 0, .7);
+
+        transition: transform .3s ease-out;
+        transform: translateY(-100px);
+
+        cursor: pointer;
+        }
+
+        &.__active .message {
+            transform: translateY(0);
+            }
+    }
+
+/* /Notification */
+
+/* /Common */
+
+
+/* Header
+-------------------------------------------------- */
+
+header {
+    padding: $line 0;
+    margin-bottom: $line * 4;
+    
+    background: $bg-inv;
+    color: $c-inv;
+
+    h1 {
+        margin: 0;
+
+        a {
+            text-decoration: none;
+            color: $c-inv;
+            }
+        }
+    }
+
+/* /Header */
+
+
+/* Footer
+-------------------------------------------------- */
+
+footer {
+    border-top: 1px solid $bg-alt;
+    padding: ($line * 2) 0;
+
+    color: $c-alt;
+    }
+
+/* /Footer */
+
+
+/* Main
+-------------------------------------------------- */
+
+main {
+    margin-bottom: $line * 4;
+
+    &.__loading {
+        preloader();
+
+        &:after {
+            content: "Loading data, please wait..."
+            position: absolute;
+            top: 50%; margin-top: 50px;
+            left: 0; right: 0;
+            text-align: center;
+
+            font-size: 1em;
+            color: $c-aux;
+            white-space: nowrap;
+            }
+
+        .container,
+        .container *,
+        .container *:before,
+        .container *:after {
+            visibility: hidden;
+            }
+        }
+
+    }
+
+/* /Main */
+
+
+/* Utility
+-------------------------------------------------- */
+
+.invisible {
+    visibility: hidden;
+    }
+
+.hidden {
+    display: none;
+    }
+
+/* /Utility */
+
+/* /Express Dummy
+---------------------------------------------------------------------------------- */

@@ -1,7 +1,11 @@
 /**
- * Created by eugeny.horoshilov on 25.01.15.
+ * Express Dummy
+ *
+ * Basic settings
  */
 
+//
+// common modules
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
@@ -27,16 +31,7 @@ app.use(compress({level: 6}));
 
 //
 // locals
-app.locals = {
-    version : "0.1",
-    title : "Express Dummy",
-
-    port : config.port,
-
-    name : "app"
-};
-
-app.locals.appdata = require('./data.json');
+app.locals = require('./data.json');
 
 /*
 app.use(bodyParser.json());
@@ -47,7 +42,9 @@ app.use(cookieParser());
 //
 // serve static (cacheable)
 var oneDay = 86400000;
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneDay*30 }));
+app.use(express.static(path.join(__dirname, 'public')
+//    , { maxAge: oneDay*30 }
+));
 
 //
 // router

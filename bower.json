@@ -1,0 +1,19 @@
+{
+  "name": "express-dummy",
+  "version": "1.2.0",
+  "authors": [
+    "stewiekillsloiss@gmail.com"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "skeleton": "~2.0.4",
+    "zepto": "~1.1.6"
+  }
+}

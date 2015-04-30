@@ -2,8 +2,16 @@
     "port": 3000,
     "paths" : {
         "css" : {
-            "in" : "/assets/css/**/*.scss",
-            "out" : "/public/css"
+            "src" : "assets/css",
+            "dest" : "public/css"
+        },
+        "js" : {
+            "src" : "assets/js",
+            "dest" : "public/js"
+        },
+        "img" : {
+            "src" : "assets/img",
+            "dest" : "public/img"
         }
     },
     "development" : true

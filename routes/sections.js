@@ -21,14 +21,9 @@ router.get('/:id', function(req, res) {
 });
 
 function renderSection(res, id){
-    var sectionData = appdata.data[id];
-
-    res.render('section', {
-        name : "section",
-
-        company : sectionData.company,
-        address : sectionData.address,
-        about : sectionData.about
+    res.render('section', appdata.data[id], function(err, html){
+        if(err) return;
+        res.send(html);
     });
 }
 

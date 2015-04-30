@@ -1,4 +1,11 @@
 {
+    "version" : "1.2.0",
+    "title" : "Express Dummy",
+    "columns" : {
+        "one" : "eight",
+        "two" : "four"
+    },
+
     "intro" : {
         "about": "Dolore cillum consectetur laboris laboris sint ipsum laboris. Sunt irure laborum laboris consectetur elit nisi Lorem consequat ullamco duis incididunt sunt adipisicing. Dolor reprehenderit ut elit",
         "extra": "Minim irure fugiat elit dolor amet"

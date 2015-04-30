@@ -3,25 +3,45 @@
 <head>
     <% include partials/head.ejs %>
 </head>
-<body class="__<%= name %>">
+<body>
 
-    <% include partials/header.ejs %>
+<% include partials/header.ejs %>
 
-    <h2>
-        <%= company %>
+<main>
+    <div class="container">
 
-        <sub>
-            <address>
-                <%= address %>
-            </address>
-        </sub>
-    </h2>
+        <div class="columns <%= columns.one %>">
+            <section>
+                <h2>
+                    <%= company %>
+                </h2>
+                <section>
+                    <p>
+                        <cite><%= address %></cite>
+                    </p>
+                    <p>
+                        <%= about %>
+                    </p>
+                </section>
+            </section>
+        </div>
 
-    <section>
-        <%= about %>
-    </section>
+        <div class="columns <%= columns.two %>">
+            <menu>
+                <% data.forEach(function(item, i, array){ %>
+                <li>
+                    <a href="/section/<%= i %>" title="<%= item.company %>"><%= item.company %></a>
+                </li>
+                <% }); %>
+            </menu>
+        </div>
 
-    <% include partials/footer.ejs %>
+    </div>
+</main>
 
+<% include partials/footer.ejs %>
+<div class="notification"><div class="message"></div></div>
+
+<% include partials/scriptsBottom.ejs %>
 </body>
 </html>
