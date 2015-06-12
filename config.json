@@ -13,6 +13,5 @@
             "src" : "assets/img",
             "dest" : "public/img"
         }
-    },
-    "development" : true
+    }
 }

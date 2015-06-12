@@ -14,18 +14,22 @@ var autoprefixer = require('autoprefixer-stylus');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var merge = require('merge2');
+var runSequence = require('run-sequence');
 
 var config = require('./config.json');
 var paths = config.paths;
-var devmode = config.development;
+var production = $.util.env.p || $.util.env.prod;
 
 // autoprefixer settings
 var Browsers = ['last 2 versions'];
 
+var templateData = require('./data.json');
+
 var stylusOptions = {
     use: [autoprefixer({browsers: Browsers})],
     paths: [paths.css.src],
-    import: ['vars']
+    import: ['vars'],
+    compress: !!production
 };
 
 
@@ -34,20 +38,25 @@ var stylusOptions = {
 
 gulp.task('styles', function () {
     return merge(
+
+        // normalize
+        gulp.src('node_modules/normalize.css/normalize.css'),
+
         // vendor css
-        gulp.src('bower_components/skeleton/css/*.css')
-            .pipe($.stylus(stylusOptions))
-            .pipe($.concatCss('skeleton.css')),
+        gulp.src('node_modules/skeleton.css/skeleton.css'),
 
         // custom css
-        gulp.src(paths.css.src + '/**/*.styl')
+        gulp.src([
+                '!' + paths.css.src + '/**/_*.*',
+                paths.css.src + '/**/*.styl'
+            ])
+            .pipe($.plumber())
             .pipe($.stylus(stylusOptions))
             .pipe($.concatCss('all.css'))
         )
+        .pipe($.plumber())
         .pipe($.concatCss('main.css'))
-        .pipe($.if(!devmode, $.minifyCss({ advanced : false })))
         .pipe(gulp.dest(paths.css.dest));
-//    .pipe(reload({ stream: true }));
 });
 
 
@@ -58,7 +67,7 @@ gulp.task('styles', function () {
 gulp.task('scripts-vendor', function(){
     return gulp.src([
             paths.js.src + '/vendor/**/*.js',
-            'bower_components/zepto/zepto.min.js'
+            'node_modules/zepto/zepto.min.js'
         ])
         .pipe(gulp.dest('public/js/vendor/'));
 });
@@ -66,16 +75,18 @@ gulp.task('scripts-vendor', function(){
 // custom
 gulp.task('scripts-custom', function(){
     return gulp.src(paths.js.src + '/*.js')
+        .pipe($.plumber())
         .pipe($.concat('main.js'))
-        .pipe($.if(!devmode, $.uglify()))
+        .pipe(production ? $.uglify() : $.util.noop())
         .pipe(gulp.dest(paths.js.dest));
 });
 
 // main js only
 gulp.task('scripts-main', function(){
     return gulp.src(paths.js.src + '/*.js')
+        .pipe($.plumber())
         .pipe($.concat('main.js'))
-        .pipe($.if(!devmode, $.uglify()))
+        .pipe(production ? $.uglify() : $.util.noop())
         .pipe(gulp.dest(paths.js.dest));
 });
 
@@ -90,6 +101,12 @@ gulp.task('scripts', ['scripts-vendor', 'scripts-custom'], function(){
 //        .pipe(gulp.dest('public/'));
 //});
 
+// compile EJS templates
+//gulp.task('html', function(){
+//    return gulp.src('views/*.ejs')
+//        .pipe($.ejs(templateData))
+//        .pipe(gulp.dest('public/'));
+//});
 
 //
 // data
@@ -149,7 +166,7 @@ gulp.task('bs-reload', function(){
 //            baseDir: "./public"
 //        },
 //        files: ["public/**/*.*"],
-//        port: 4000
+//        port: config.port
 ////        , logLevel: "debug"
 //    });
 //});
@@ -159,8 +176,12 @@ gulp.task('bs-reload', function(){
 // cleanup
 gulp.task('clean', function(cb){
     return del([
-        paths.css.dest, paths.js.dest, paths.img.dest, 'public/*.ico'
-//        , 'public/*.html', 'public/*.json'
+//        'public/*.html',
+//        'public/*.json'
+        paths.css.dest,
+        paths.js.dest,
+        paths.img.dest,
+        'public/*.ico'
     ], cb);
 });
 
@@ -168,9 +189,13 @@ gulp.task('clean', function(cb){
 //
 // build
 gulp.task('build', ['clean'], function(){
-    return $.runSequence(
-//        'html', 'data',
-        'images', 'favicon', 'styles', 'scripts'
+    return runSequence(
+//        'html',
+//        'data',
+        'images',
+        'favicon',
+        'styles',
+        'scripts'
     );
 });
 
@@ -189,16 +214,15 @@ gulp.task('publish', function(){
 
 //
 // default
-gulp.task('default', ['clean'], function(){
-    $.runSequence(
-//        'html', 'data',
-        'images', 'favicon', 'styles', 'scripts', 'sync',
+gulp.task('default', ['build'], function(){
+    runSequence(
+        'sync',
         function(){
 //            gulp.watch('./src/*.html', ['html']);
-//            gulp.watch('./src/*.json', ['data']);
-            gulp.watch('./assets/css/**/*.*', ['styles']);
-//            gulp.watch('./assets/js/**/*.js', ['scripts']);
-            gulp.watch('./assets/js/main.js', ['scripts-main']);
+            gulp.watch('./data.json', ['bs-reload']);
+//            gulp.watch('./templates/**/*.*', ['templates']);
+            gulp.watch('./' + paths.js.src + '/**/*.js', ['scripts-all']);
             gulp.watch('./views/**/*.ejs', ['bs-reload']);
+            gulp.watch('./' + paths.css.src + '/**/*.styl', ['styles']);
         });
 });
