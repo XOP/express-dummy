@@ -1,8 +1,5 @@
 var gulp = require('gulp');
 
-// load grunt tasks
-// require('gulp-grunt')(gulp);
-
 // auto-load gulp-* plugins
 var $ = require('gulp-load-plugins')();
 
@@ -28,8 +25,7 @@ var templateData = require('./data.json');
 var stylusOptions = {
     use: [autoprefixer({browsers: Browsers})],
     paths: [paths.css.src],
-    import: ['vars'],
-    compress: !!production
+    import: ['_vars']
 };
 
 
@@ -56,6 +52,7 @@ gulp.task('styles', function () {
         )
         .pipe($.plumber())
         .pipe($.concatCss('main.css'))
+        .pipe(production ? $.minifyCss() : $.util.noop())
         .pipe(gulp.dest(paths.css.dest));
 });
 
