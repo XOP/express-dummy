@@ -6,6 +6,9 @@ Current version uses ExpressJS to maintain the server.
 However, it's not obligatory for basic development.
 
 
+**Please use [Front Dummy](https://github.com/XOP/front-dummy) if you need regular SPA scaffolding.**
+
+
 ## Installation
 
 ```
